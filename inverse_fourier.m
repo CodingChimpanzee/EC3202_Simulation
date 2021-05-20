@@ -1,32 +1,30 @@
 function [result] = inverse_fourier(ft, M, N)
-%   INVERSE_FOURIER_TRANSFORM for total patch
-%   M = w, N = h
+% INVERSE_FOURIER_TRANSFORM for total patch
+% M = w, N = h
 
-const = 2*pi;
+w_m = (2*pi)/M;
+w_n = (2*pi)/N;
 
 % for loop for m : M by M Matrix
-sum1 = ones(M, M);
-for u = 1 : M
-    sum1(u, u) = 1;
-    for m = 2 : M
-        sum1(u, u) = complex(cos(const*(m-1)*(u-1)/M), sin(const*(m-1)*(u-1)/M));
+W_m = ones(M, M);
+for m = 2 : M
+    for u = 2 : M
+        W_m(m, u) = complex(cos(w_m*(m-1)*(u-1)), sin(w_m*(m-1)*(u-1)));
     end
 end
 
 
 % for loop for n : N by N Matrix
-sum2 = ones(N, N);
-for v = 1 : N
-    sum2(v, v) = 1;
-    for n = 2 : N
-        sum2(v, v) = complex(cos(const*(n-1)*(v-1)/N), sin(const*(n-1)*(v-1)/N));
+W_n= ones(N, N);
+for n = 2 : N
+    for v = 2 : N
+        W_n(n, v) = complex(cos(w_n*(n-1)*(v-1)), sin(w_n*(n-1)*(v-1)));
     end
 end
 
-% Making final fourier transform: Conjugate
+% Making final fourier transform: Multiplication
 % Result is F itself
-ft = double(ft);
-result = complex(real(sum2)*real(ft), imag(sum2)*imag(ft));
-result = complex(real(result)*real(sum1), imag(result)*imag(sum1));
+result = W_n*ft;
+result = result*W_m;
 end
 

@@ -2,30 +2,40 @@ function [result] = fourier_transform(patch, M, N)
 %   FOURIER_TRANSFORM for total patch
 %   M = w, N = h
 
-const = -2*pi;
+w_m = (-2*pi)/M;
+w_n = (-2*pi)/N;
 
 % for loop for m : M by M Matrix
-sum1 = ones(M, M);
-for u = 1 : M
-    sum1(u, u) = 1;
-    for m = 2 : M
-        sum1(u, u) = complex(cos(const*(m-1)*(u-1)/M), sin(const*(m-1)*(u-1)/M));
+W_m = ones(M, M);
+for m = 2 : M
+    for u = 2 : M
+        W_m(m, u) = complex(cos(w_m*(m-1)*(u-1)), sin(w_m*(m-1)*(u-1)));
+        %W_m(m,u) = exp((w_m*1i*(m-1)*(u-1))*(m-1)*(u-1));
     end
 end
+W_m = (1/M)*W_m;
 
 
 % for loop for n : N by N Matrix
-sum2 = ones(N, N);
-for v = 1 : N
-    sum2(v, v) = 1;
-    for n = 2 : N
-        sum2(v, v) = complex(cos(const*(n-1)*(v-1)/N), sin(const*(n-1)*(v-1)/N));
+W_n = ones(N, N);
+for n = 2 : N
+    for v = 2 : N
+        W_n(n, v) = complex(cos(w_n*(n-1)*(v-1)), sin(w_n*(n-1)*(v-1)));
+        %W_n(n,v) = exp((w_n*1i*(n-1)*(v-1))*(n-1)*(v-1));
     end
 end
+W_n = (1/N)*W_n;
 
-% Making final fourier transform: Conjugate
+
+% Making final fourier transform: Multiplication
 % Result is F itself
 patch = double(patch);
-result = complex(real(sum2)*real(patch), imag(sum2)*imag(patch));
-result = complex(real(result)*real(sum1), imag(result)*imag(sum1));
+% patch is always real value
+% Hence, multiplication should be done like this:
+%result = W_n*patch;
+%result = result*W_m;
+result = complex(real(W_n)*real(patch), imag(W_n)*real(patch));
+result = complex((real(result)*real(W_m)-imag(result)*imag(W_m)), (real(result)*imag(W_m)+imag(result)*real(W_m)));
 end
+% Used some ideas from
+% http://fourier.eng.hmc.edu/e101/lectures/Image_Processing/node6.html
