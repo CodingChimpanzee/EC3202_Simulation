@@ -15,9 +15,11 @@ t = 0;
 for a = 1 : (480-p)
     for b = 1 : (360-q)
         standard = imcrop(image, [a b p-1 q-1]);
-        G = fourier_transform(standard, p, q);
+        %G = fourier_transform(standard, p, q);
+        G = fft2(standard);
         R = (patch.*conj(G))./abs(patch.*conj(G));
-        r = inverse_fourier(R, p, q);
+        r = ifft2(R);
+        %r = inverse_fourier(R, p, q);
         % comp = abs(angle(r))/pi;
         comp = abs(r);
         [findmaxval, ~] = max(comp(:));
@@ -29,5 +31,4 @@ end
 imshow(image);
 hold on
 rectangle('Position',[row,col,p,q], 'LineWidth',1 ,'LineStyle','--')
-title("Result of Correlation");
 end

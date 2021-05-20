@@ -3,8 +3,6 @@
 
 f1 = figure;
 f2 = figure;
-f3 = figure;
-f4 = figure;
 
 startimg = imread('C:\Users\강성현\Documents\MATLAB\source_image\start.jpg');
 startgray = rgb2gray(startimg);
@@ -85,7 +83,7 @@ img100 = imread('C:\Users\강성현\Documents\MATLAB\source_image\0100.jpg');
 img100gray = rgb2gray(img100);
 
 figure(f1);
-subplot(2, 2, 1), imshow(startgray);
+imshow(startgray);
 hold on
 rectangle('Position',[xtart,ytart,w,h], 'LineWidth',1 ,'LineStyle','--')
 title("Starting Position, hold on...")
@@ -94,34 +92,34 @@ title("Starting Position, hold on...")
 %-------------------------------------------------------------------------%
 % Phase Correlation
 figure(f1);
-subplot(2, 2, 2), Correlation(result, img10gray);
+subplot(Correlation(result, img10gray);
 title("Result of Correlation img10");
 figure(f1);
-subplot(2, 2, 3), Correlation(result, img20gray);
+Correlation(result, img20gray);
 title("Result of Correlation img20");
 figure(f1);
-subplot(2, 2, 4), Correlation(result, img30gray);
+Correlation(result, img30gray);
 title("Result of Correlation img30");
-figure(f2);
-subplot(2, 2, 1), Correlation(result, img40gray);
+figure(f1);
+Correlation(result, img40gray);
 title("Result of Correlation img40");
-figure(f2);
-subplot(2, 2, 2), Correlation(result, img50gray);
+figure(f1);
+Correlation(result, img50gray);
 title("Result of Correlation img50");
-figure(f2);
-subplot(2, 2, 3), Correlation(result, img60gray);
+figure(f1);
+Correlation(result, img60gray);
 title("Result of Correlation img60");
-figure(f2);
-subplot(2, 2, 4), Correlation(result, img70gray);
+figure(f1);
+Correlation(result, img70gray);
 title("Result of Correlation img70");
-figure(f3);
-subplot(2, 2, 1), Correlation(result, img80gray);
+figure(f1);
+Correlation(result, img80gray);
 title("Result of Correlation img80");
-figure(f3);
-subplot(2, 2, 2), Correlation(result, img90gray);
+figure(f1);
+Correlation(result, img90gray);
 title("Result of Correlation img90");
-figure(f3);
-subplot(2, 2, 3), Correlation(result, img100gray);
+figure(f1);
+Correlation(result, img100gray);
 title("Result of Correlation img100");
 
 % 60 90 Fail
