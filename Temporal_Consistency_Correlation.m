@@ -1,20 +1,39 @@
-function Correlation(patch, image)
+function [row, col] = Temporal_Consistency_Correlation(patch,image, inrow, incol, sr, sc)
+%TEMPORAL_CONSISTENCY_FUNCTION Uses not only correlation but also temporal
+%consistency
+% It uses some of the codes inside Correlation.m
 
-% Get the size of the image
-w = size(image);
-w = w(2);
-h = size(image);
-h = h(1);
+if inrow - sr < 0
+    sr = inrow-1;
+    disp("1");
+end
+if incol - sc < 0
+    sc = incol-1;
+        disp("2");
+end
 
+if inrow + sr > 360
+    sr = 359-inrow;
+        disp("3");
+end
+if incol + sc > 480
+    sc = 479-incol;
+        disp("4");
+end
+
+disp(inrow);
+disp(incol);
+disp(sr);
+disp(sc);
 % Get the size of the patch
 p = size(patch);
 p = p(2);
 q = size(patch);
 q = q(1);
 
-value = zeros(w, h);
-for a = 1 : (480-p)
-    for b = 1 : (360-q)
+value = zeros(2*sr, 2*sc);
+for a = inrow-sr : inrow+sr
+    for b = incol-sc : incol+sc
         standard = imcrop(image, [a b p-1 q-1]);
         %G = fourier_transform(standard, p, q);
         G = fft2(standard);
@@ -22,8 +41,6 @@ for a = 1 : (480-p)
         %r = inverse_fourier(R, p, q);
         r = ifft2(R);
         comp = abs(r);
-        %comp = atan((imag(r))/(real(r)));
-        %comp = angle(r);
         [findmaxval, ~] = max(comp(:));
         value(a, b) = findmaxval;
     end
@@ -38,3 +55,4 @@ imshow(image);
 hold on
 rectangle('Position',[row,col,p,q], 'LineWidth',1 ,'LineStyle','--')
 end
+

@@ -1,55 +1,24 @@
-%-------------------------------------------------------------------------%
-% Inital Values
+% It uses temporal consistency when doing correlation
+% Get the prior code from main.m
 
 f1 = figure;
 f2 = figure;
 f3 = figure;
-f4 = figure;
 
 startimg = imread('C:\Users\강성현\Documents\MATLAB\source_image\start.jpg');
 startgray = rgb2gray(startimg);
 xtart = 272;
 ytart = 138;
-w = 50;
-h = 50;
+w = 30;
+h = 30;
 face = imcrop(startgray, [xtart ytart w-1 h-1]);    % Make image Gray
-
-% face: [268 135 39 38]
-% armpit: [280 175 20 20]
-% face_exactly: [272 138 30 30]
-% reshaping1: [270,138,43,48]
-% reshaping2: [268,138,45,50]
-% goodexcept20: [272 138 45 50]
-% BESTEXCEPT70/90(Little): [272 138 50 50]
-%-------------------------------------------------------------------------%
-% Fourier Transform
 result = fourier_transform(face, w, h);
-% Get the result patch
-faceout = 20*(log(abs(result)));
-subplot(2,2,1), imagesc(faceout);
-title("face fourier transform");
-% Print the result of face fourier transform
 
-total = fourier_transform(startgray, 480, 360);
-totalout = 20*(log10(abs(total)));
-subplot(2,2,2), imagesc(totalout);
-title("start.jpg fourier transform");
-% Print the result of start.jpg fourier transform
-
-%-------------------------------------------------------------------------%
-% Inverse Fourier Transform
-
-face_recov = inverse_fourier(result, w, h);
-face_recov = (abs(face_recov));
-subplot(2,2,3), imagesc(face_recov);
-title("recovered face");
-% Print the recovered face
-
-total_recov = inverse_fourier(total, 480, 360);
-total_recov = (abs(total_recov));
-subplot(2,2,4), imagesc(total_recov);
-title("recovered start.jpg");
-% Print the recovered start.jpg
+figure(f1);
+subplot(2, 2, 1), imshow(startgray);
+hold on
+rectangle('Position',[xtart,ytart,w,h], 'LineWidth',1 ,'LineStyle','--')
+title("Starting Position, hold on...")
 
 %-------------------------------------------------------------------------%
 % Phase Correlation Image read
@@ -88,39 +57,42 @@ figure(f1);
 subplot(2, 2, 1), imshow(startgray);
 hold on
 rectangle('Position',[xtart,ytart,w,h], 'LineWidth',1 ,'LineStyle','--')
-title("Starting Position, hold on...")
-
+title("Starting Position(Temp_cons), hold on...")
 
 %-------------------------------------------------------------------------%
-% Correlation
+% Correlation using Temporal Consistency
+sr = 80;
+sc = 80;
 
 figure(f1);
-subplot(2, 2, 2), Correlation(result, img10gray);
+subplot(2, 2, 2), [row, col] = Temporal_Consistency_Correlation(result, img10gray, xtart, ytart, sr, sc);
 title("Result of Correlation img10");
 figure(f1);
-subplot(2, 2, 3), Correlation(result, img20gray);
+subplot(2, 2, 3), [row, col] = Temporal_Consistency_Correlation(result, img20gray, row, col, sr, sc);
 title("Result of Correlation img20");
 figure(f1);
-subplot(2, 2, 4), Correlation(result, img30gray);
+subplot(2, 2, 4), [row, col] = Temporal_Consistency_Correlation(result, img30gray, row, col, sr, sc);
 title("Result of Correlation img30");
 figure(f2);
-subplot(2, 2, 1), Correlation(result, img40gray);
+subplot(2, 2, 1), [row, col] = Temporal_Consistency_Correlation(result, img40gray, row, col, sr, sc);
 title("Result of Correlation img40");
 figure(f2);
-subplot(2, 2, 2), Correlation(result, img50gray);
+subplot(2, 2, 2), [row, col] = Temporal_Consistency_Correlation(result, img50gray, row, col, sr, sc);
 title("Result of Correlation img50");
 figure(f2);
-subplot(2, 2, 3), Correlation(result, img60gray);
+subplot(2, 2, 3), [row, col] = Temporal_Consistency_Correlation(result, img60gray, row, col, sr, sc);
 title("Result of Correlation img60");
 figure(f2);
-subplot(2, 2, 4), Correlation(result, img70gray);
+subplot(2, 2, 4), [row, col] = Temporal_Consistency_Correlation(result, img70gray, row, col, sr, sc);
 title("Result of Correlation img70");
 figure(f3);
-subplot(2, 2, 1), Correlation(result, img80gray);
+subplot(2, 2, 1), [row, col] = Temporal_Consistency_Correlation(result, img80gray, row, col, sr, sc);
 title("Result of Correlation img80");
 figure(f3);
-subplot(2, 2, 2), Correlation(result, img90gray);
+subplot(2, 2, 2), [row, col] = Temporal_Consistency_Correlation(result, img90gray, row, col, sr, sc);
 title("Result of Correlation img90");
 figure(f3);
-subplot(2, 2, 3), Correlation(result, img100gray);
+subplot(2, 2, 3), [row, col] = Temporal_Consistency_Correlation(result, img100gray, row, col, sr, sc);
 title("Result of Correlation img100");
+
+
