@@ -3,28 +3,22 @@ function [row, col] = Temporal_Consistency_Correlation(patch,image, inrow, incol
 %consistency
 % It uses some of the codes inside Correlation.m
 
+% Row Exceptions
 if inrow - sr < 0
     sr = inrow-1;
-    disp("1");
 end
 if incol - sc < 0
     sc = incol-1;
-        disp("2");
 end
 
+% Column Exceptions
 if inrow + sr > 360
     sr = 359-inrow;
-        disp("3");
 end
 if incol + sc > 480
     sc = 479-incol;
-        disp("4");
 end
 
-disp(inrow);
-disp(incol);
-disp(sr);
-disp(sc);
 % Get the size of the patch
 p = size(patch);
 p = p(2);
@@ -49,6 +43,9 @@ end
 % Find maximum value's coordinates
 [max_val, ~]= max(double(value(:)));
 [row, col] = ind2sub(size(value), find(value==max_val));
+
+% Activation map output
+imagesc(transpose(value));
 
 % Image output
 imshow(image);

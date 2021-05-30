@@ -6,7 +6,7 @@ f2 = figure;
 f3 = figure;
 f4 = figure;
 
-startimg = imread('C:\Users\강성현\Documents\MATLAB\source_image\start.jpg');
+startimg = imread('C:\Users\HyunKang\Documents\MATLAB\source_image\start.jpg');
 startgray = rgb2gray(startimg);
 xtart = 272;
 ytart = 138;
@@ -54,34 +54,34 @@ title("recovered start.jpg");
 %-------------------------------------------------------------------------%
 % Phase Correlation Image read
 
-img10 = imread('C:\Users\강성현\Documents\MATLAB\source_image\0010.jpg');
+img10 = imread('C:\Users\HyunKang\Documents\MATLAB\source_image\0010.jpg');
 img10gray = rgb2gray(img10);
 
-img20 = imread('C:\Users\강성현\Documents\MATLAB\source_image\0020.jpg');
+img20 = imread('C:\Users\HyunKang\Documents\MATLAB\source_image\0020.jpg');
 img20gray = rgb2gray(img20);
 
-img30 = imread('C:\Users\강성현\Documents\MATLAB\source_image\0030.jpg');
+img30 = imread('C:\Users\HyunKang\Documents\MATLAB\source_image\0030.jpg');
 img30gray = rgb2gray(img30);
 
-img40 = imread('C:\Users\강성현\Documents\MATLAB\source_image\0040.jpg');
+img40 = imread('C:\Users\HyunKang\Documents\MATLAB\source_image\0040.jpg');
 img40gray = rgb2gray(img40);
 
-img50 = imread('C:\Users\강성현\Documents\MATLAB\source_image\0050.jpg');
+img50 = imread('C:\Users\HyunKang\Documents\MATLAB\source_image\0050.jpg');
 img50gray = rgb2gray(img50);
 
-img60 = imread('C:\Users\강성현\Documents\MATLAB\source_image\0060.jpg');
+img60 = imread('C:\Users\HyunKang\Documents\MATLAB\source_image\0060.jpg');
 img60gray = rgb2gray(img60);
 
-img70 = imread('C:\Users\강성현\Documents\MATLAB\source_image\0070.jpg');
+img70 = imread('C:\Users\HyunKang\Documents\MATLAB\source_image\0070.jpg');
 img70gray = rgb2gray(img70);
 
-img80 = imread('C:\Users\강성현\Documents\MATLAB\source_image\0080.jpg');
+img80 = imread('C:\Users\HyunKang\Documents\MATLAB\source_image\0080.jpg');
 img80gray = rgb2gray(img80);
 
-img90 = imread('C:\Users\강성현\Documents\MATLAB\source_image\0090.jpg');
+img90 = imread('C:\Users\HyunKang\Documents\MATLAB\source_image\0090.jpg');
 img90gray = rgb2gray(img90);
 
-img100 = imread('C:\Users\강성현\Documents\MATLAB\source_image\0100.jpg');
+img100 = imread('C:\Users\HyunKang\Documents\MATLAB\source_image\0100.jpg');
 img100gray = rgb2gray(img100);
 
 figure(f1);
