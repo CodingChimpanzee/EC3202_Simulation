@@ -1,17 +1,15 @@
 function [row, col] = Temporal_Consistency_Correlation(patch,image, inrow, incol, sr, sc)
 %TEMPORAL_CONSISTENCY_FUNCTION Uses not only correlation but also temporal
 %consistency
-% It uses some of the codes inside Correlation.m
+% It uses some of the codes from Correlation.m
 
-% Row Exceptions
+% Row Exceptions & Column Exceptions
 if inrow - sr < 0
     sr = inrow-1;
 end
 if incol - sc < 0
     sc = incol-1;
 end
-
-% Column Exceptions
 if inrow + sr > 360
     sr = 359-inrow;
 end
@@ -29,11 +27,9 @@ value = zeros(2*sr, 2*sc);
 for a = inrow-sr : inrow+sr
     for b = incol-sc : incol+sc
         standard = imcrop(image, [a b p-1 q-1]);
-        %G = fourier_transform(standard, p, q);
-        G = fft2(standard);
+        G = fourier_transform(standard, p, q);
         R = (patch.*conj(G))./abs(patch.*conj(G));
-        %r = inverse_fourier(R, p, q);
-        r = ifft2(R);
+        r = inverse_fourier(R, p, q);
         comp = abs(r);
         [findmaxval, ~] = max(comp(:));
         value(a, b) = findmaxval;

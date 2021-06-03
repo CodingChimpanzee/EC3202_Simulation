@@ -14,13 +14,14 @@ w = 50;
 h = 50;
 face = imcrop(startgray, [xtart ytart w-1 h-1]);    % Make image Gray
 
+% Coordinate: [xtart ytart w h]
 % face: [268 135 39 38]
 % armpit: [280 175 20 20]
 % face_exactly: [272 138 30 30]
 % reshaping1: [270,138,43,48]
 % reshaping2: [268,138,45,50]
 % goodexcept20: [272 138 45 50]
-% BESTEXCEPT70/90(Little): [272 138 50 50]
+% REPORT_VALUE: [272 138 50 50]
 %-------------------------------------------------------------------------%
 % Fourier Transform
 result = fourier_transform(face, w, h);
@@ -52,7 +53,7 @@ title("recovered start.jpg");
 % Print the recovered start.jpg
 
 %-------------------------------------------------------------------------%
-% Phase Correlation Image read
+% Correlation Image read
 
 img10 = imread('C:\Users\HyunKang\Documents\MATLAB\source_image\0010.jpg');
 img10gray = rgb2gray(img10);
@@ -93,7 +94,7 @@ title("Starting Position, hold on...")
 
 %-------------------------------------------------------------------------%
 % Correlation
-
+tic
 figure(f1);
 subplot(2, 2, 2), Correlation(result, img10gray);
 title("Result of Correlation img10");
@@ -124,3 +125,4 @@ title("Result of Correlation img90");
 figure(f3);
 subplot(2, 2, 3), Correlation(result, img100gray);
 title("Result of Correlation img100");
+toc

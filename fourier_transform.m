@@ -13,8 +13,6 @@ for m = 2 : M
         %W_m(m,u) = exp((w_m*1i*(m-1)*(u-1))*(m-1)*(u-1));
     end
 end
-W_m = (1/M)*W_m;
-
 
 % for loop for n : N by N Matrix
 W_n = ones(N, N);
@@ -24,7 +22,6 @@ for n = 2 : N
         %W_n(n,v) = exp((w_n*1i*(n-1)*(v-1))*(n-1)*(v-1));
     end
 end
-W_n = (1/N)*W_n;
 
 
 % Making final fourier transform: Multiplication
@@ -37,5 +34,3 @@ patch = double(patch);
 result = complex(real(W_n)*real(patch), imag(W_n)*real(patch));
 result = complex((real(result)*real(W_m)-imag(result)*imag(W_m)), (real(result)*imag(W_m)+imag(result)*real(W_m)));
 end
-% Used some ideas from
-% http://fourier.eng.hmc.edu/e101/lectures/Image_Processing/node6.html

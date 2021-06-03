@@ -1,4 +1,5 @@
-% It uses temporal consistency when doing correlation
+%-------------------------------------------------------------------------%
+% This uses temporal consistency when doing correlation
 % Get the prior code from main.m
 
 f1 = figure;
@@ -21,7 +22,7 @@ rectangle('Position',[xtart,ytart,w,h], 'LineWidth',1 ,'LineStyle','--')
 title("Starting Position, hold on...")
 
 %-------------------------------------------------------------------------%
-% Phase Correlation Image read
+% Correlation Image read
 
 img10 = imread('C:\Users\HyunKang\Documents\MATLAB\source_image\0010.jpg');
 img10gray = rgb2gray(img10);
@@ -61,9 +62,12 @@ title("Starting Position(Temp Cons), hold on...")
 
 %-------------------------------------------------------------------------%
 % Correlation using Temporal Consistency
+
+% Image searching criteria sr(row), sc(column)
 sr = 80;
 sc = 80;
 
+tic
 figure(f1);
 subplot(2, 2, 2), [row, col] = Temporal_Consistency_Correlation(result, img10gray, xtart, ytart, sr, sc);
 title("Result of Correlation img10");
@@ -94,5 +98,5 @@ title("Result of Correlation img90");
 figure(f3);
 subplot(2, 2, 3), [row, col] = Temporal_Consistency_Correlation(result, img100gray, row, col, sr, sc);
 title("Result of Correlation img100");
-
+toc
 

@@ -1,11 +1,5 @@
 function Correlation(patch, image)
 
-% Get the size of the image
-w = size(image);
-w = w(2);
-h = size(image);
-h = h(1);
-
 % Get the size of the patch
 p = size(patch);
 p = p(2);
@@ -29,10 +23,11 @@ end
 [max_val, ~]= max(double(value(:)));
 [row, col] = ind2sub(size(value), find(value==max_val));
 
-% Activation Map output
+% Activation Map output, If you want to do get activation map, please use.
 %imagesc(transpose(value));
 
 % Image output
+% If you want to get activation map, do not run this code.
 imshow(image);
 hold on
 rectangle('Position',[row, col,p,q], 'LineWidth',1 ,'LineStyle','--')
